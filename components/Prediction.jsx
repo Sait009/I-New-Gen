@@ -10,11 +10,11 @@ export default function PredictionDetails() {
     const [loading, setLoading] = useState(true);
 
     const comfortLevelMapping = {
-        0: { text: "Asymptomatic", color: "#00BF63" }, // Asymptomatic
-        1: { text: "Mildly Symptomatic", color: "#7EDA57" }, // Mildly Symptomatic
-        2: { text: "Multi-Symptomatic", color: "#94AABF" }, // Multi-Symptomatic
-        3: { text: "Significantly Symptomatic", color: "#FF914D" }, // Significantly Symptomatic
-        4: { text: "Intolerable and Requiring Medical Help", color: "#FF5757" }, // Intolerable and Requiring Medical Help
+        4: { text: "Asymptomatic", color: "#00BF63" }, // Asymptomatic
+        3: { text: "Mildly Symptomatic", color: "#7EDA57" }, // Mildly Symptomatic
+        0: { text: "Multi-Symptomatic", color: "#94AABF" }, // Multi-Symptomatic
+        2: { text: "Significantly Symptomatic", color: "#FF914D" }, // Significantly Symptomatic
+        1: { text: "Intolerable and Requiring Medical Help", color: "#FF5757" }, // Intolerable and Requiring Medical Help
     };
 
     useEffect(() => {
