@@ -106,7 +106,7 @@ const PatientDetail = () => {
                             sdPath="Device/Inpatient/MD-V5-0000804/1s/SD-HeartRate"
                             unit="BPM"
                             yMin={60}
-                            yMax={140}
+                            yMax={200}
                             bdColor="#FF6666"
                             bgColor="#FF6666"
                         />
