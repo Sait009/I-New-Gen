@@ -134,7 +134,7 @@ const PatientDetail = () => {
                             sdPath="Device/Inpatient/MD-V5-0000804/1s/SD-EDA"
                             unit="µS"
                             yMin={0}
-                            yMax={5}
+                            yMax={10}
                             bdColor="#87CEFA"
                             bgColor="#87CEFA"
 
