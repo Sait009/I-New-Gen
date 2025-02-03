@@ -74,13 +74,13 @@ export default function PredictionDetails() {
             {/* Additional Data Section */}
             <div className="grid gap-4 text-lg text-black">
                 <div className="p-4 border rounded-lg bg-gray-100">
-                    <strong>EDA:</strong> {latestData.EDA.toFixed(2)} µS
+                    <strong>EDA:</strong> {latestData.EDA} µS
                 </div>
                 <div className="p-4 border rounded-lg bg-gray-100">
-                    <strong>HR:</strong> {latestData.HR.toFixed(2)} bpm
+                    <strong>HR:</strong> {latestData.HR} bpm
                 </div>
                 <div className="p-4 border rounded-lg bg-gray-100">
-                    <strong>Skin Temp:</strong> {latestData.ST.toFixed(2)} °C
+                    <strong>Skin Temp:</strong> {latestData.ST} °C
                 </div>
                 <div className="p-4 border rounded-lg bg-gray-100">
                     <strong>Timestamp:</strong>{" "}
