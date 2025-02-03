@@ -10,11 +10,11 @@ export default function PredictionDetails() {
     const [loading, setLoading] = useState(true);
 
     const comfortLevelMapping = {
-        4: { text: "Asymptomatic", color: "#00BF63" }, // Asymptomatic
-        3: { text: "Mildly Symptomatic", color: "#7EDA57" }, // Mildly Symptomatic
-        0: { text: "Multi-Symptomatic", color: "#94AABF" }, // Multi-Symptomatic
-        2: { text: "Significantly Symptomatic", color: "#FF914D" }, // Significantly Symptomatic
-        1: { text: "Intolerable and Requiring Medical Help", color: "#FF5757" }, // Intolerable and Requiring Medical Help
+        4: { text: "Asymptomatic", color: "#00BF63" },
+        3: { text: "Mildly Symptomatic", color: "#7EDA57" },
+        0: { text: "Multi-Symptomatic", color: "#94AABF" },
+        2: { text: "Significantly Symptomatic", color: "#FF914D" },
+        1: { text: "Intolerable and Requiring Medical Help", color: "#FF5757" },
     };
 
     useEffect(() => {
@@ -30,20 +30,22 @@ export default function PredictionDetails() {
                 if (data) {
                     setLatestData(data);
                     const level = parseInt(data.ComfortLevel, 10);
-                    const levelInfo = comfortLevelMapping[level] || { text: "Unknown", color: "#A0A0A0" }; // Default color for unknown level
+                    const levelInfo = comfortLevelMapping[level] || { text: "Unknown", color: "#A0A0A0" };
                     setComfortLevel(levelInfo.text);
                     setComfortLevelClass(levelInfo.color);
                 } else {
                     console.error("No data available");
+                    setLatestData(null);
                     setComfortLevel("No data available");
-                    setComfortLevelClass("#A0A0A0"); // Default color for no data
+                    setComfortLevelClass("#A0A0A0");
                 }
                 setLoading(false);
             },
             (error) => {
                 console.error("Error fetching data:", error);
+                setLatestData(null);
                 setComfortLevel("Error fetching data");
-                setComfortLevelClass("#A0A0A0"); // Default color for error
+                setComfortLevelClass("#A0A0A0");
                 setLoading(false);
             }
         );
@@ -64,8 +66,8 @@ export default function PredictionDetails() {
             {/* Comfort Level Section */}
             <div className="mb-8 text-center">
                 <div
-                    className={`relative p-8 rounded-lg text-white shadow-lg`}
-                    style={{ backgroundColor: comfortLevelClass }} // Dynamically apply background color
+                    className="relative p-8 rounded-lg text-white shadow-lg"
+                    style={{ backgroundColor: comfortLevelClass }}
                 >
                     <span className="text-4xl font-extrabold">{comfortLevel}</span>
                 </div>
@@ -74,17 +76,17 @@ export default function PredictionDetails() {
             {/* Additional Data Section */}
             <div className="grid gap-4 text-lg text-black">
                 <div className="p-4 border rounded-lg bg-gray-100">
-                    <strong>EDA:</strong> {latestData.EDA.toFixed(2)} µS
+                    <strong>EDA:</strong> {latestData.EDA?.toFixed(2) ?? "N/A"} µS
                 </div>
                 <div className="p-4 border rounded-lg bg-gray-100">
-                    <strong>HR:</strong> {latestData.HR.toFixed(2)} bpm
+                    <strong>HR:</strong> {latestData.HR?.toFixed(2) ?? "N/A"} bpm
                 </div>
                 <div className="p-4 border rounded-lg bg-gray-100">
-                    <strong>Skin Temp:</strong> {latestData.ST.toFixed(2)} °C
+                    <strong>Skin Temp:</strong> {latestData.ST?.toFixed(2) ?? "N/A"} °C
                 </div>
                 <div className="p-4 border rounded-lg bg-gray-100">
                     <strong>Timestamp:</strong>{" "}
-                    {new Date(latestData.Timestamp).toLocaleString()}
+                    {latestData.Timestamp ? new Date(latestData.Timestamp).toLocaleString() : "N/A"}
                 </div>
             </div>
         </div>
