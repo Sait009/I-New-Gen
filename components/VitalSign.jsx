@@ -1,11 +1,11 @@
-'use client';
-import { useState, useEffect, useRef } from "react";
+"use client";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { query, ref, onValue } from "firebase/database";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { db } from "@/app/firebase";
 import 'chartjs-adapter-date-fns';
-
+import { format } from "date-fns";
 
 export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, bdColor, bgColor }) {
     const [value, setValue] = useState(null);
@@ -16,7 +16,8 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
 
     useEffect(() => {
         const unsubscribeData = onValue(query(ref(db, dataPath)), (snapshot) => {
-            const data = parseFloat(snapshot.val());
+            const rawData = snapshot.val();
+            const data = parseFloat(rawData ?? 0); // ป้องกัน NaN
             if (!isNaN(data)) {
                 const roundedValue = parseFloat(data.toFixed(2));
                 setValue(roundedValue);
@@ -30,7 +31,8 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
         });
 
         const unsubscribeSD = onValue(query(ref(db, sdPath)), (snapshot) => {
-            const sdData = parseFloat(snapshot.val());
+            const rawSD = snapshot.val();
+            const sdData = parseFloat(rawSD ?? 0);
             if (!isNaN(sdData) && sdData >= 0) {
                 setSdValue(sdData);
             }
@@ -51,9 +53,10 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
                 const max = value + sdValue;
                 const randomValue = parseFloat((Math.random() * (max - min) + min).toFixed(2));
 
-                setDataPoints((prev) => {
-                    return [...prev.slice(-29), { time: new Date().toISOString(), value: randomValue }];
-                });
+                setDataPoints((prev) => [
+                    ...prev.slice(-29),
+                    { time: new Date().toISOString(), value: randomValue },
+                ]);
 
                 setDisplayedValue(randomValue);
             }, 1000);
@@ -62,8 +65,8 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
         return () => clearInterval(intervalRef.current);
     }, [value, sdValue]);
 
-    const chartData = {
-        labels: dataPoints.map((point) => point.time),
+    const chartData = useMemo(() => ({
+        labels: dataPoints.map((point) => format(new Date(point.time), "HH:mm:ss")),
         datasets: [
             {
                 label: title,
@@ -71,68 +74,41 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
                 borderColor: bdColor,
                 backgroundColor: bgColor,
                 borderWidth: 2,
-                tension: 0,
-                pointRadius: 0.1,
+                tension: 0.3,
+                pointRadius: 0,
                 pointHoverRadius: 5,
             },
         ],
-    };
+    }), [dataPoints, bdColor, bgColor, title]);
 
-    const latestTimestamp = dataPoints.length > 0 ? dataPoints[dataPoints.length - 1].time : new Date().toISOString();
-
-    const chartOptions = {
+    const chartOptions = useMemo(() => ({
         responsive: true,
         maintainAspectRatio: false,
         scales: {
             x: {
-                // type: "time",
-                // time: {
-                //     unit: "second",
-                //     stepSize: 1,
-                //     displayFormats: {
-                //         second: "mm:ss",
-                //     },
-                // },
                 title: {
                     display: true,
-                    text: "TIME (SECONDS)",
-                    font: {
-                        size: 14,
-                        weight: "bold",
-                    },
+                    text: "TIME (HH:mm:ss)",
+                    font: { size: 14, weight: "bold" },
                 },
-                ticks: {
-                    display: false,
-                },
-                grid: {
-                    drawTicks: false,
-                    drawBorder: false,
-                },
+                ticks: { autoSkip: true, maxTicksLimit: 6 },
+                grid: { drawTicks: false, drawBorder: false },
             },
             y: {
                 min: yMin,
                 max: yMax,
-                ticks: {
-                    stepSize: (yMax - yMin) / 4,
-                },
-                grid: {
-                    color: "rgba(0, 0, 0, 0.1)",
-                },
+                ticks: { stepSize: (yMax - yMin) / 4 },
+                grid: { color: "rgba(0, 0, 0, 0.1)" },
             },
         },
         plugins: {
-            legend: {
-                display: false,
-            },
+            legend: { display: false },
         },
-    };
-
-
-
+    }), [yMin, yMax]);
 
     return (
-        <div className="h-auto px-10" >
-            <div className="p-6 bg-white border-4 border-black-500 rounded-lg w-80">
+        <div className="h-auto px-10">
+            <div className="p-6 bg-white border-4 border-gray-500 rounded-lg w-80 shadow-md">
                 <h2 className="text-black text-center text-lg font-semibold py-2 rounded" style={{ backgroundColor: bgColor }}>
                     {title}
                 </h2>
@@ -143,6 +119,6 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
                     <Line data={chartData} options={chartOptions} />
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
