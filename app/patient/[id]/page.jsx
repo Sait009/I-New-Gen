@@ -102,8 +102,8 @@ const PatientDetail = () => {
                     <div className="flex justify-center items-center gap-4 h-full">
                         <VitalSign
                             title="Heart Rate"
-                            dataPath="Device/Inpatient/MD-V5-0000804/1s/HeartRate"
-                            sdPath="Device/Inpatient/MD-V5-0000804/1s/SD-HeartRate"
+                            dataPath="Device/Inpatient/MD-V5-0000205/1s/HeartRate"
+                            sdPath="Device/Inpatient/MD-V5-0000205/1s/SD-HeartRate"
                             unit="BPM"
                             yMin={60}
                             yMax={200}
@@ -116,8 +116,8 @@ const PatientDetail = () => {
                     <div className="flex justify-center items-center gap-4 h-full">
                         <VitalSign
                             title="Skin Temperature"
-                            dataPath="Device/Inpatient/MD-V5-0000804/1s/ST"
-                            sdPath="Device/Inpatient/MD-V5-0000804/1s/SD-ST"
+                            dataPath="Device/Inpatient/MD-V5-0000205/1s/ST"
+                            sdPath="Device/Inpatient/MD-V5-0000205/1s/SD-ST"
                             unit="°C"
                             yMin={30}
                             yMax={40}
@@ -130,8 +130,8 @@ const PatientDetail = () => {
                     <div className="flex justify-center items-center gap-4 h-full">
                         <VitalSign
                             title="Electrodermal Activity"
-                            dataPath="Device/Inpatient/MD-V5-0000804/1s/EDA"
-                            sdPath="Device/Inpatient/MD-V5-0000804/1s/SD-EDA"
+                            dataPath="Device/Inpatient/MD-V5-0000205/1s/EDA"
+                            sdPath="Device/Inpatient/MD-V5-0000205/1s/SD-EDA"
                             unit="µS"
                             yMin={0}
                             yMax={10}
