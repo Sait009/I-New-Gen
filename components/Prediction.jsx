@@ -10,11 +10,11 @@ export default function PredictionDetails() {
     const [loading, setLoading] = useState(true);
 
     const comfortLevelMapping = {
-    0: { label: "Neutral", color: "#A0A0A0" }, // สีเทา สื่อถึงกลางๆ
-    1: { label: "Very Uncomfortable", color: "#FF0000" }, // สีแดง สื่อถึงความไม่สบายมาก
-    2: { label: "Uncomfortable", color: "#FFA500" }, // สีส้ม สื่อถึงความไม่สบาย
-    3: { label: "Comfortable", color: "#7EDA57" }, // สีเขียวอ่อน สื่อถึงความสบาย
-    4: { label: "Very Comfortable", color: "#00BF63" }, // สีเขียวเข้ม สื่อถึงความสบายมาก
+    0: { text: "Neutral", color: "#A0A0A0" }, // สีเทา สื่อถึงกลางๆ
+    1: { text: "Very Uncomfortable", color: "#FF0000" }, // สีแดง สื่อถึงความไม่สบายมาก
+    2: { text: "Uncomfortable", color: "#FFA500" }, // สีส้ม สื่อถึงความไม่สบาย
+    3: { text: "Comfortable", color: "#7EDA57" }, // สีเขียวอ่อน สื่อถึงความสบาย
+    4: { text: "Very Comfortable", color: "#00BF63" }, // สีเขียวเข้ม สื่อถึงความสบายมาก
 
   };
     
