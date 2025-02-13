@@ -2,7 +2,7 @@ import { getDatabase, ref, remove } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA_cQ8V_AcobfEUqCC4GZhJHzbKrgT3koU",
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: "inewgenweb.firebaseapp.com",
     databaseURL: "https://inewgenweb-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "inewgenweb",
