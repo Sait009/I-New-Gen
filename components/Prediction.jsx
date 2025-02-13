@@ -9,7 +9,7 @@ export default function PredictionDetails() {
     const [comfortLevelClass, setComfortLevelClass] = useState("");
     const [loading, setLoading] = useState(true);
 
-    const comfortLevelClass = {
+    const comfortLevelMapping = {
     0: { label: "Neutral", color: "#A0A0A0" }, // สีเทา สื่อถึงกลางๆ
     1: { label: "Very Uncomfortable", color: "#FF0000" }, // สีแดง สื่อถึงความไม่สบายมาก
     2: { label: "Uncomfortable", color: "#FFA500" }, // สีส้ม สื่อถึงความไม่สบาย
