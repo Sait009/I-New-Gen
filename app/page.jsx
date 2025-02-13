@@ -17,11 +17,11 @@ const PredictionPage = () => {
   const patientsPath = "Patients/Data";
 
   const comfortLevelMapping = {
-    0: { label: "Asymptomatic", color: "#00BF63" },
-    1: { label: "Mildly Symptomatic", color: "#7EDA57" },
-    2: { label: "Multi-Symptomatic", color: "#94AABF" },
-    3: { label: "Significantly Symptomatic", color: "#FF914D" },
-    4: { label: "Intolerable and Requiring Medical Help", color: "#FF5757" },
+    0: { label: "Neutral", color: "#00BF63" },
+    1: { label: "Comfortable", color: "#7EDA57" },
+    2: { label: "Very Comfortable", color: "#94AABF" },
+    3: { label: "Uncomfortable", color: "#FF914D" },
+    4: { label: "Very Uncomfortable", color: "#FF5757" },
   };
 
   useEffect(() => {
