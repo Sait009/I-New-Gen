@@ -17,11 +17,12 @@ const PredictionPage = () => {
   const patientsPath = "Patients/Data";
 
   const comfortLevelMapping = {
-    0: { label: "Neutral", color: "#00BF63" },
-    1: { label: "Very Comfortable", color: "#94AABF"},
-    2: { label: "Uncomfortable", color: "#FF914D" },
-    3: { label: "Comfortable", color: "#7EDA57" },
-    4: { label: "Very Uncomfortable", color: "#FF5757" },
+    0: { label: "Neutral", color: "#A0A0A0" }, // สีเทา สื่อถึงกลางๆ
+    1: { label: "Very Uncomfortable", color: "#FF0000" }, // สีแดง สื่อถึงความไม่สบายมาก
+    2: { label: "Uncomfortable", color: "#FFA500" }, // สีส้ม สื่อถึงความไม่สบาย
+    3: { label: "Comfortable", color: "#7EDA57" }, // สีเขียวอ่อน สื่อถึงความสบาย
+    4: { label:  "Very Comfortable", color: "#00BF63" }, // สีเขียวเข้ม สื่อถึงความสบายมาก
+
   };
 
   useEffect(() => {
