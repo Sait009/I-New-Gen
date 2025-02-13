@@ -18,9 +18,9 @@ const PredictionPage = () => {
 
   const comfortLevelMapping = {
     0: { label: "Neutral", color: "#00BF63" },
-    1: { label: "Comfortable", color: "#7EDA57" },
-    2: { label: "Very Comfortable", color: "#94AABF" },
-    3: { label: "Uncomfortable", color: "#FF914D" },
+    1: { label: "Very Comfortable", color: "#94AABF"},
+    2: { label: "Uncomfortable", color: "#FF914D" },
+    3: { label: "Comfortable", color: "#7EDA57" },
     4: { label: "Very Uncomfortable", color: "#FF5757" },
   };
 
