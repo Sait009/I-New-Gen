@@ -49,7 +49,7 @@ export default function VitalSign({ title, dataPath, sdPath, unit, yMin, yMax, b
             intervalRef.current = setInterval(() => {
                 const min = value - sdValue;
                 const max = value + sdValue;
-                const randomValue = parseFloat((Math.random() * (max - min) + min));
+                const randomValue = parseFloat((Math.random() * (max - min) + min).toFixed(2));
 
                 setDataPoints((prev) => {
                     return [...prev.slice(-29), { time: new Date().toISOString(), value: randomValue }];
